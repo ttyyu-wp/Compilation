@@ -85,6 +85,7 @@ namespace Compilation.com.interpreter.result
             return null;
         }
 
+        //加法运算
         public RunResult add(RunResult v)
         {
             if (v is StringRunResult)
@@ -269,48 +270,6 @@ namespace Compilation.com.interpreter.result
                     vr = v.floatV;
                 }
                 return new NumRunResult(false, 0, Math.Round(Math.Pow(vl, vr), 5, MidpointRounding.AwayFromZero));
-            }
-        }
-
-        public static int GetDecimalPlaces(double value)
-        {
-            string s = value.ToString("G17", CultureInfo.InvariantCulture).TrimEnd('0');
-            if (s.Contains("."))
-            {
-                return s.Split('.')[1].Length;
-            }
-            return 0;
-        }
-
-        public static double RoundToSignificantDigits(double value, int digits)
-        {
-            if (value == 0) return 0;
-
-            double scale = Math.Pow(10, Math.Floor(Math.Log10(Math.Abs(value))) + 1);
-            return Math.Round(value / scale, digits - 1) * scale;
-        }
-
-        public static double getResult(double a, double b, double result, string operation, int maxPrecision = 15)
-        {
-           
-
-            // 根据输入值的小数位数决定输出精度
-            int decimalA = GetDecimalPlaces(a);
-            int decimalB = GetDecimalPlaces(b);
-
-            int totalDecimal = Math.Max(decimalA, decimalB); // 取最大作为参考
-            int precision = Math.Min(totalDecimal + 1, maxPrecision); // 动态调整精度
-
-            // 对于加减法：保留与最大小数位一致
-            // 对于乘除法/取模/乘方：可考虑用有效数字控制
-            if (operation.Equals("add") || operation.Equals("sub"))
-            {
-                return Math.Round(result, totalDecimal);
-            }
-            else
-            {
-                // 对于其他运算（如乘除、幂、模），保留一定数量的有效数字
-                return RoundToSignificantDigits(result, precision);
             }
         }
 
