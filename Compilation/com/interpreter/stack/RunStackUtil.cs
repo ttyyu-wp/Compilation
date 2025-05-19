@@ -43,7 +43,7 @@ namespace Compilation.com.interpreter.stack
                 {
                     return true;
                 }
-                //TODO: callStack[tempIndex].type 可能存在问题
+                
                 if (callStack[tempIndex].type == SingleRunStackType.CIA)
                 {
                     break;
@@ -67,7 +67,7 @@ namespace Compilation.com.interpreter.stack
                 {
                     return callStack[tempIndex].currVmap[varName];
                 }
-                //TODO: callStack[tempIndex].type 可能存在问题
+                
                 if (callStack[tempIndex].type == SingleRunStackType.CIA)
                 {
                     break;

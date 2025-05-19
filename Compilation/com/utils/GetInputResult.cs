@@ -3,38 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Compilation.com.utils
 {
     public class GetInputResult
     {
-        private static MainMenu menu;
-
         public static string get(string str)
         {
-            controllersInit(str);
+            InputForm inputForm = new InputForm(str);
+            var result = inputForm.ShowDialog(); // 显示弹出窗口
 
-            string returnStr = menu.InputTextBox.Text;
+            if (result == DialogResult.OK)
+            {
+                string userInput = inputForm.UserInput; // 获取用户输入
 
-            controllersClose();
-
-            return returnStr;
+                inputForm.Dispose();
+                return userInput;
+            }
+            inputForm.Dispose();
+            return null;
         }
 
-        private static void controllersClose()
-        {
-            menu.InputLabel.Visible = false;
-            menu.InputTextBox.Visible = false;
-            menu.InputButton.Visible = false;
-            menu.InputTextBox.Text = "";
-        }
-
-        private static void controllersInit(string str)
-        {
-            menu.InputLabel.Visible = true;
-            menu.InputTextBox.Visible = true;
-            menu.InputButton.Visible = true;
-            menu.InputLabel.Text = str;
-        }
+        
     }
 }

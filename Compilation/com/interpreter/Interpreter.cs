@@ -102,14 +102,15 @@ namespace Compilation.com.interpreter
             //传参
             for (int i = 0; i < fn.paraList.Count; i++)
             {
+                //TODO: 调用函数变量不存在问题
                 //形参
                 DeclareNode dn = (DeclareNode)fn.paraList[i];
                 //形参类型
-                string typeStr = dn.kw.value.Trim();
+                string typeStr = dn.id.value.Trim();
                 //新变量
                 Variable variable = new Variable(typeStr);
                 //形参名称
-                string nameStr = dn.id.value.Trim();
+                string nameStr = dn.kw.value.Trim();
                 //值参
                 RunResult rr = traversalArithORStrBoolExprForRun(cn.paraname[i]);
                 //数值型参数
@@ -331,7 +332,7 @@ namespace Compilation.com.interpreter
             {
                 try
                 {
-                    ga.setValue(nrr.intV, (NumRunResult)nrr, null, false);
+                    ga.setValue(nrr.intV, (NumRunResult)rr, null, false);
                 }
                 catch (ArrayIndexOutOfBoundsException)
                 {
@@ -353,7 +354,6 @@ namespace Compilation.com.interpreter
             }
             else if (ga.type == VariableTypes.BOOL && (rr is BoolRunResult))
             {
-                //TODO: 布尔值数组变量赋值待检查
                 try
                 {
                     ga.setValue(nrr.intV, null, null, ((BoolRunResult)rr).b);
@@ -738,10 +738,6 @@ namespace Compilation.com.interpreter
                         }
                         throw new MyException("字符串不能进行乘法外的运算：" + ((BinaryOPNode)root).t.TokenString());
                     }
-
-                    
-
-                    
 
                     NumRunResult vl = (NumRunResult)rrl;
                     NumRunResult vr = (NumRunResult)rrr;

@@ -45,9 +45,10 @@ namespace Compilation.com.interpreter
             {
                 intV[(int)index] = nrr.intV;
             }
+            //TODO: float数组赋值精度问题
             else if (type == VariableTypes.FLOAT)
             {
-                floatV[(int)index] =(float)nrr.floatV;
+                floatV[(int)index] = Math.Round(nrr.floatV, 7, MidpointRounding.AwayFromZero);
             }
             else if (type == VariableTypes.STRING)
             {
