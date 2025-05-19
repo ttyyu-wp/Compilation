@@ -152,8 +152,7 @@ namespace Compilation.bn.syntax
             {
                 SyntaxNode declarePara = parseDeclare();
                 fn.addParam(declarePara);
-                //TODO: 索引自增存疑 与原不符
-                //tokenIndex++;
+                
                 curr = currToken();
             }
             curr = currToken();
@@ -310,8 +309,7 @@ namespace Compilation.bn.syntax
                 {
                     tokenIndex++;
                     SyntaxNode indexExpr = parseArithORStrORBoolExpr();
-                    //TODO: 可能存在问题：curr取值
-                    //curr = currToken();
+                    
                     if (curr.type == TokenType.RSB)
                     {
                         throw new MyException("缺少 ']' : " + currToken().TokenString());
@@ -359,7 +357,7 @@ namespace Compilation.bn.syntax
                     {
                         Token var = currToken();
                         tokenIndex++;
-                        //TODO: Variable待更改
+                        
                         dmn.assignList.Add(new VariableNode(var));
                     }
                     if (currToken().type == TokenType.DF)
@@ -380,14 +378,16 @@ namespace Compilation.bn.syntax
         //call -> ID LPAREN (arithORStrORBoolExpr)* RPAREN
         public static SyntaxNode parseCall(Token var)
         {
+            //TODO: 方法调用名称问题
             tokenIndex++;
             Token curr = currToken();
-            CallNode cn = new CallNode(curr);
+            CallNode cn = new CallNode(var);
+
             while (curr.type != TokenType.RPAREN)
             {
                 SyntaxNode exprParam = parseArithORStrORBoolExpr();
                 cn.addParam(exprParam);
-                //TODO: tokenIndex++; 是否需要
+                
                 curr = currToken();
             }
             if (curr.type == TokenType.RPAREN)

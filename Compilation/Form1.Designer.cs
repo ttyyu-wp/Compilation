@@ -35,9 +35,6 @@
             this.tokenOutArea = new ScintillaNET.Scintilla();
             this.btn_save = new System.Windows.Forms.Button();
             this.btn_load = new System.Windows.Forms.Button();
-            this.InputLabel = new System.Windows.Forms.Label();
-            this.InputTextBox = new System.Windows.Forms.TextBox();
-            this.InputButton = new System.Windows.Forms.Button();
             this.syntaxNodeOutArea = new ScintillaNET.Scintilla();
             this.SuspendLayout();
             // 
@@ -103,36 +100,6 @@
             this.btn_load.UseVisualStyleBackColor = true;
             this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
             // 
-            // InputLabel
-            // 
-            this.InputLabel.AutoEllipsis = true;
-            this.InputLabel.AutoSize = true;
-            this.InputLabel.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.InputLabel.Location = new System.Drawing.Point(27, 836);
-            this.InputLabel.Name = "InputLabel";
-            this.InputLabel.Size = new System.Drawing.Size(152, 28);
-            this.InputLabel.TabIndex = 11;
-            this.InputLabel.Text = "InputLabel";
-            this.InputLabel.Visible = false;
-            // 
-            // InputTextBox
-            // 
-            this.InputTextBox.Location = new System.Drawing.Point(32, 884);
-            this.InputTextBox.Name = "InputTextBox";
-            this.InputTextBox.Size = new System.Drawing.Size(301, 28);
-            this.InputTextBox.TabIndex = 12;
-            this.InputTextBox.Visible = false;
-            // 
-            // InputButton
-            // 
-            this.InputButton.Location = new System.Drawing.Point(363, 858);
-            this.InputButton.Name = "InputButton";
-            this.InputButton.Size = new System.Drawing.Size(127, 54);
-            this.InputButton.TabIndex = 13;
-            this.InputButton.Text = "确认";
-            this.InputButton.UseVisualStyleBackColor = true;
-            this.InputButton.Visible = false;
-            // 
             // syntaxNodeOutArea
             // 
             this.syntaxNodeOutArea.Location = new System.Drawing.Point(1091, 101);
@@ -146,9 +113,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1475, 933);
             this.Controls.Add(this.syntaxNodeOutArea);
-            this.Controls.Add(this.InputButton);
-            this.Controls.Add(this.InputTextBox);
-            this.Controls.Add(this.InputLabel);
             this.Controls.Add(this.btn_load);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.tokenOutArea);
@@ -173,9 +137,6 @@
         public ScintillaNET.Scintilla tokenOutArea;
         public System.Windows.Forms.Button btn_save;
         public System.Windows.Forms.Button btn_load;
-        public System.Windows.Forms.Label InputLabel;
-        public System.Windows.Forms.TextBox InputTextBox;
-        public System.Windows.Forms.Button InputButton;
         public ScintillaNET.Scintilla syntaxNodeOutArea;
     }
 }
