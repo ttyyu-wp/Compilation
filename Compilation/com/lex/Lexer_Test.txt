@@ -1,0 +1,18 @@
+int a = 6
+float b = 9.00
+string c = "aaaa"
+bool = true
+Cia main(){}
+! +-*/% == **
+$
+if else while 
+break
+return
+returnNull
+continue
+print
+readInt
+readFloat
+readString
+readBool
+//aaaaaa
