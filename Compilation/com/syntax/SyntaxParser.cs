@@ -436,7 +436,8 @@ namespace Compilation.bn.syntax
         {
             SyntaxNode termLeft = parseTermA();
             Token opt = currToken();
-            while (opt.type == TokenType.OR)
+            while (opt.type == TokenType.PLUS ||
+                opt.type == TokenType.MINUS)
             {
                 tokenIndex++;
                 SyntaxNode termRight = parseTermA();
@@ -445,13 +446,13 @@ namespace Compilation.bn.syntax
             }
             return termLeft;
         }
-        
+
         //termA -> termB((AND)termB)*
         public static SyntaxNode parseTermA()
         {
             SyntaxNode termLeft = parseTermB();
             Token opt = currToken();
-            while (opt.type == TokenType.AND)
+            while (opt.type == TokenType.COMP)
             {
                 tokenIndex++;
                 SyntaxNode termRight = parseTermB();
@@ -466,7 +467,7 @@ namespace Compilation.bn.syntax
         {
             SyntaxNode termLeft = parseTermC();
             Token opt = currToken();
-            while (opt.type == TokenType.COMP)
+            while (opt.type == TokenType.OR)
             {
                 tokenIndex++;
                 SyntaxNode termRight = parseTermC();
@@ -475,14 +476,13 @@ namespace Compilation.bn.syntax
             }
             return termLeft;
         }
-        
+
         //termC -> termD((PLUS|MINUS)termD)*
         public static SyntaxNode parseTermC()
         {
             SyntaxNode termLeft = parseTermD();
             Token opt = currToken();
-            while (opt.type == TokenType.PLUS || 
-                opt.type == TokenType.MINUS)
+            while (opt.type == TokenType.AND)
             {
                 tokenIndex++;
                 SyntaxNode termRight = parseTermD();

@@ -167,7 +167,7 @@ namespace Compilation
                 tokens = lex.Lexer.analyzeTokenFromCode(code);
                 parser.init(tokens);
                 SyntaxNode syntaxNodes = parser.parse();
-                //interpreter.runAST(syntaxNodes);
+                interpreter.runAST(syntaxNodes);
 
                 PrintSyntaxNode.print(syntaxNodes);
                 PrintToken.print(tokens);
