@@ -1,0 +1,10 @@
+﻿Cia main() {
+    int a = 1
+    float b = 2.5
+    string c = "abcd"
+    bool d = true
+    bool e = false 
+    print(a + b + "\n") 
+    print(d | e + "\n")
+    print(d & e + "\n")
+}

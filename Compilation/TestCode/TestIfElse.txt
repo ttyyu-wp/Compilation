@@ -1,0 +1,12 @@
+﻿
+Cia main() {
+
+    bool a = false
+
+    if (a) {
+        print("aaa")
+    }
+    else {
+        print("bbb")
+    }
+}

@@ -78,7 +78,6 @@ namespace Compilation
             }
         }
 
-
         private void InputForm_Resize(object sender, EventArgs e)
         {
             float newx = (this.Width) / x;

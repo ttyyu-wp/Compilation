@@ -1,0 +1,12 @@
+﻿Cia main() {
+    float pi = 3.1415
+    float a = sin(0 + 3)
+    float b = cos(0 + pi)
+    float c = tan(0) ** 3
+    float d = log(8)
+
+    print(a + "\n")
+    print(b + "\n")
+    print(c + "\n")
+    print(d + "\n")
+}

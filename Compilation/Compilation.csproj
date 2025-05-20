@@ -145,6 +145,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadMe.txt" />
+    <Content Include="TestCode\TestArrayAssign.txt" />
+    <Content Include="TestCode\TestAssign.txt" />
+    <Content Include="TestCode\TestBreak.txt" />
+    <Content Include="TestCode\TestCallFun.txt" />
+    <Content Include="TestCode\TestComp.txt" />
+    <Content Include="TestCode\TestContinue.txt" />
+    <Content Include="TestCode\TestIfElse.txt" />
+    <Content Include="TestCode\TestPrint.txt" />
+    <Content Include="TestCode\TestRead.txt" />
+    <Content Include="TestCode\TestWhile.txt" />
+    <Content Include="TestCode\TriAndLogTest.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

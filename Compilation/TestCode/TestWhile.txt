@@ -1,0 +1,13 @@
+﻿
+Cia main() {
+
+    int a = 0
+
+    while (a < 10) {
+        print(" " * (10 - a))
+        print("a" * a)
+        print(" " * a)
+        print("\n")
+        a = a + 1
+    }
+}

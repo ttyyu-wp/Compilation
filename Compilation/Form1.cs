@@ -169,8 +169,8 @@ namespace Compilation
                 SyntaxNode syntaxNodes = parser.parse();
                 interpreter.runAST(syntaxNodes);
 
-                PrintSyntaxNode.print(syntaxNodes);
-                PrintToken.print(tokens);
+                //PrintSyntaxNode.print(syntaxNodes);   //语法树输出 测试用
+                //PrintToken.print(tokens);             //Token序列输出 测试用
             }
             catch (Exception exc)
             {
@@ -253,6 +253,10 @@ namespace Compilation
             }
         }
 
-        
+        //退出界面 按钮功能实现
+        private void btn_out_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
