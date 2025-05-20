@@ -27,6 +27,10 @@ namespace Compilation.com.interpreter.result
             {
                 sin = ((BoolRunResult)v).b + "";
             }
+            else if (v is TriAndLogRunResult)
+            {
+                sin = ((TriAndLogRunResult)v).num + "";
+            }
             else
             {
                 NumRunResult nrr = (NumRunResult)v;

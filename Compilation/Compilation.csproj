@@ -59,6 +59,7 @@
     <Compile Include="com\interpreter\result\NumRunResult.cs" />
     <Compile Include="com\interpreter\result\RunResult.cs" />
     <Compile Include="com\interpreter\result\StringRunResult.cs" />
+    <Compile Include="com\interpreter\result\TriAndLogRunResult.cs" />
     <Compile Include="com\interpreter\stack\RunStackUtil.cs" />
     <Compile Include="com\interpreter\stack\SingleRunStack.cs" />
     <Compile Include="com\interpreter\stack\SingleRunStackType.cs" />

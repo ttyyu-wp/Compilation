@@ -102,7 +102,7 @@ namespace Compilation.com.interpreter
             //传参
             for (int i = 0; i < fn.paraList.Count; i++)
             {
-                //TODO: 调用函数变量不存在问题
+                //TODO: 调用函数变量不存在问题 （已解决）
                 //形参
                 DeclareNode dn = (DeclareNode)fn.paraList[i];
                 //形参类型
@@ -170,7 +170,7 @@ namespace Compilation.com.interpreter
             }
             catch (ReturnException e)
             {
-                //TODO: MyException e.result 可能存在问题
+                //TODO: MyException e.result 可能存在问题（暂未发现）
                 result = e.result;
             }
             RunStackUtil.pop();
@@ -239,7 +239,7 @@ namespace Compilation.com.interpreter
                 an.right is UnaryOPNode || an.right is VariableNode || 
                 an.right is StringNode || an.right is BoolNode || 
                 an.right is CallNode || an.right is ReadNode || 
-                an.right is ArrayValueNode)//TODO: || an.right is TriAndLogNode 
+                an.right is ArrayValueNode || an.right is TriAndLogNode)//TODO: || an.right is TriAndLogNode 
             {
                 RunResult rr = traversalArithORStrBoolExprForRun(an.right);
                 if (rr == null)
@@ -429,8 +429,8 @@ namespace Compilation.com.interpreter
                     pn.exprForPrint is BoolNode || 
                     pn.exprForPrint is CallNode ||
                     pn.exprForPrint is ArrayValueNode ||
-                    pn.exprForPrint is ReadNode  //TODO: pn.exprForPrint is TriAndLogNode
-                    /*||pn.exprForPrint is TriAndLogNode*/))
+                    pn.exprForPrint is ReadNode ||//TODO: pn.exprForPrint is TriAndLogNode
+                    pn.exprForPrint is TriAndLogNode))
                 {
                     throw new MyException("只能打印表达式！" + root.toString());
                 }
@@ -708,7 +708,8 @@ namespace Compilation.com.interpreter
                 else if (bon.t.type == TokenType.PLUS)
                 {
                     if ((rrl is StringRunResult) || (rrr is StringRunResult) || 
-                        ((rrl is NumRunResult) && (rrr is NumRunResult)))
+                        ((rrl is NumRunResult) && (rrr is NumRunResult)) || 
+                        ((rrl is TriAndLogRunResult) && (rrr is TriAndLogRunResult)))
                     {
                         
                         return rrl.add(rrr);
@@ -739,53 +740,143 @@ namespace Compilation.com.interpreter
                         throw new MyException("字符串不能进行乘法外的运算：" + ((BinaryOPNode)root).t.TokenString());
                     }
 
-                    NumRunResult vl = (NumRunResult)rrl;
-                    NumRunResult vr = (NumRunResult)rrr;
+                    //NumRunResult vl = (NumRunResult)rrl;
+                    //NumRunResult vr = (NumRunResult)rrr;
 
-                    if (bon.t.type == TokenType.MINUS)
+                    if (rrl is NumRunResult)
                     {
-                        return vl.sub(vr);
-                    }
-                    else if (bon.t.type == TokenType.MUL)
-                    {
-                        return vl.mul(vr);
-                    }
-                    else if (bon.t.type == TokenType.DIV || bon.t.type == TokenType.MODULAR)
-                    {
-                        if (vr.isInt)
+                        NumRunResult vl = (NumRunResult)rrl;
+                        if (bon.t.type == TokenType.MINUS)
                         {
-                            if (vr.intV == 0)
+                            return vl.sub(rrr);
+                        }
+                        else if (bon.t.type == TokenType.MUL)
+                        {
+                            return vl.mul(rrr);
+                        }
+                        else if (bon.t.type == TokenType.DIV || bon.t.type == TokenType.MODULAR)
+                        {
+                            if (rrr is NumRunResult)
                             {
-                                throw new MyException("不能除以0 " + ((BinaryOPNode)root).t.TokenString());
+                                NumRunResult vr = (NumRunResult)rrr;
+                                if (vr.isInt)
+                                {
+                                    if (vr.intV == 0)
+                                    {
+                                        throw new MyException("不能除以0 " + ((BinaryOPNode)root).t.TokenString());
+                                    }
+                                }
+                                else
+                                {
+                                    if (vr.floatV == 0)
+                                    {
+                                        throw new MyException("不能除以0 " + ((BinaryOPNode)root).t.TokenString());
+                                    }
+                                }
+                            } 
+                            else
+                            {
+                                TriAndLogRunResult vr = (TriAndLogRunResult)rrr;
+                                
+                                if (vr.num == 0)
+                                {
+                                    throw new MyException("不能除以0 " + ((BinaryOPNode)root).t.TokenString());
+                                }
+                                
                             }
-                        }
-                        else
-                        {
-                            if (vr.floatV == 0)
+
+                            
+                            if (bon.t.type == TokenType.DIV)
                             {
-                                throw new MyException("不能除以0 " + ((BinaryOPNode)root).t.TokenString());
-                            }
-                        }
-                        if (bon.t.type == TokenType.DIV)
-                        {
-                            return vl.div(vr);
-                        }
-                        else
-                        {
-                            //整数及浮点数取模
-                            if (vl.isInt && vr.isInt)
-                            {
-                                return vl.modInt(vr);
+                                return vl.div(rrr);
                             }
                             else
                             {
-                                return vl.modFloat(vr);
+                                if (rrr is NumRunResult)
+                                {
+                                    //整数及浮点数取模
+                                    NumRunResult vr = (NumRunResult)rrr;
+                                    if (vl.isInt && vr.isInt)
+                                    {
+                                        return vl.modInt(vr);
+                                    }
+                                    else
+                                    {
+                                        return vl.modFloat(vr);
+                                    }
+                                } 
+                                else
+                                {
+                                    TriAndLogRunResult tlrr = (TriAndLogRunResult)rrr;
+                                    return vl.modTL(tlrr);
+                                }
+                                
                             }
                         }
+                        else if (bon.t.type == TokenType.EXP)
+                        {
+                            return vl.exp(rrr);
+                        }
                     }
-                    else if (bon.t.type == TokenType.EXP)
+
+                    if (rrl is TriAndLogRunResult)
                     {
-                        return vl.exp(vr);
+                        TriAndLogRunResult vl = (TriAndLogRunResult) rrl;
+                        if (bon.t.type == TokenType.MINUS)
+                        {
+                            return vl.sub(rrr);
+                        }
+                        else if (bon.t.type == TokenType.MUL)
+                        {
+                            return vl.mul(rrr);
+                        }
+                        else if (bon.t.type == TokenType.DIV || bon.t.type == TokenType.MODULAR)
+                        {
+                            if (rrr is NumRunResult)
+                            {
+                                NumRunResult vr = (NumRunResult)rrr;
+                                if (vr.isInt)
+                                {
+                                    if (vr.intV == 0)
+                                    {
+                                        throw new MyException("不能除以0 " + ((BinaryOPNode)root).t.TokenString());
+                                    }
+                                }
+                                else
+                                {
+                                    if (vr.floatV == 0)
+                                    {
+                                        throw new MyException("不能除以0 " + ((BinaryOPNode)root).t.TokenString());
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                TriAndLogRunResult vr = (TriAndLogRunResult)rrr;
+
+                                if (vr.num == 0)
+                                {
+                                    throw new MyException("不能除以0 " + ((BinaryOPNode)root).t.TokenString());
+                                }
+
+                            }
+                            
+                            if (bon.t.type == TokenType.DIV)
+                            {
+                                return vl.div(rrr);
+                            }
+
+                            if (bon.t.type == TokenType.MODULAR)
+                            {
+                                return vl.mod(rrr);
+                            }
+                        }
+                        
+                        else if (bon.t.type == TokenType.EXP)
+                        {
+                            return vl.exp(rrr);
+                        }
+
                     }
                 }
             }
@@ -932,6 +1023,46 @@ namespace Compilation.com.interpreter
                 }
             }
             //TODO: TriAndLogNode待写
+            else if (root is TriAndLogNode)
+            {
+                TriAndLogNode taln = (TriAndLogNode)root;
+
+                // 先对子节点求值
+                RunResult childResult = traversalArithORStrBoolExprForRun(taln.Node);
+
+                if (!(childResult is NumRunResult))
+                {
+                    throw new MyException("只能对数值类型应用三角函数或对数函数：" + taln.ToString());
+                }
+
+                double value = 0;
+                NumRunResult nrr = (NumRunResult)childResult;
+                if (nrr.isInt)
+                {
+                    value = nrr.intV;
+                }
+                else
+                {
+                    value = nrr.floatV;
+                }
+
+                switch (taln.Type)
+                {
+                    case TriAndLogNodeType.SIN:
+                        return new NumRunResult(false, 0, Math.Round(Math.Sin(value), 5, MidpointRounding.AwayFromZero));
+                    case TriAndLogNodeType.COS:
+                        return new NumRunResult(false, 0, Math.Round(Math.Cos(value), 5, MidpointRounding.AwayFromZero));
+                    case TriAndLogNodeType.TAN:
+                        return new NumRunResult(false, 0, Math.Round(Math.Tan(value), 5, MidpointRounding.AwayFromZero));
+                    case TriAndLogNodeType.LOG:
+                        if (value <= 0)
+                            throw new MyException("log 函数参数必须大于 0：" + value);
+                        return new NumRunResult(false, 0, Math.Round(Math.Log(value), 5, MidpointRounding.AwayFromZero)); // 默认自然对数 ln(x)
+                    default:
+                        throw new MyException("未知的三角/对数函数类型：" + taln.Type);
+                }
+
+            }
             else
             {
                 throw new MyException("语法错误 " + root.toString());
