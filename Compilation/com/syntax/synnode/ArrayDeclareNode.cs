@@ -23,7 +23,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "ArrayDeclareNode: " + kw.TokenString() + " " + id.TokenString() + "[ " + length + " ]\n";
+            return "ArrayDeclare: " + kw.TokenString() + " " + id.TokenString() + "[ " + length + " ]\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

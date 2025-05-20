@@ -24,7 +24,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "IfElseNode: " + ifToken.TokenString() + "\n";
+            return "IfElse: " + ifToken.TokenString() + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

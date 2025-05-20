@@ -30,7 +30,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "TriAndLogNode" + t.TokenString() + "\n";
+            return "TriAndLog: " + t.TokenString() + "\n";
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "ArrayValueNode" + id.TokenString();
+            return "ArrayValue：" + id.TokenString();
         }
 
         public IEnumerable<SyntaxNode> getChild()

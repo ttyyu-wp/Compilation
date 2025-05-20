@@ -22,7 +22,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "BinaryOPNode: " + t.TokenString() + "\n";
+            return "BinaryOP: " + t.TokenString() + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

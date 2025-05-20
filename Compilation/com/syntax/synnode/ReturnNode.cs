@@ -20,7 +20,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "ReturnNode" + t.TokenString() + "\n";
+            return "Return: " + t.TokenString() + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

@@ -20,7 +20,7 @@ namespace Compilation.bn.syntax.synnode
         }
         public string toString()
         {
-            return "ExprListNode: " + list.Count + "\n";
+            return "ExprList: " + list.Count + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

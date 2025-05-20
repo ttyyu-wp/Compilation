@@ -19,7 +19,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "DeclareMULNode: 声明 " + kw.TokenString() + "\n";
+            return "DeclareMUL: 声明 " + kw.TokenString() + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

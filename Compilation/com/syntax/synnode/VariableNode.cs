@@ -16,7 +16,7 @@ namespace Compilation.bn.syntax
 
         public string toString()
         {
-            return "VariableNode: " + t.TokenString() + "\n";
+            return "Variable: " + t.TokenString() + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

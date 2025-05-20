@@ -28,7 +28,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "ArrayAssignNode: " + id.TokenString() + "\n";
+            return "ArrayAssign: " + id.TokenString() + "\n";
         }
     }
 }

@@ -174,7 +174,7 @@ namespace Compilation
             }
             catch (Exception exc)
             {
-                outArea.Text = exc.ToString();
+                outArea.Text = exc.Message;
                 Console.WriteLine(exc);
                 return;
             }
