@@ -17,7 +17,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "ReadNode" + "\n";
+            return "Read " + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

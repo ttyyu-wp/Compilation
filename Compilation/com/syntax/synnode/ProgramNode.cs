@@ -23,7 +23,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return " ProgramNode " + "\n";
+            return " Program " + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

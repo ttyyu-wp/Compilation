@@ -18,7 +18,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "BreakNode: " + t.TokenString() + "\n";
+            return "Break: " + t.TokenString() + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

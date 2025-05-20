@@ -18,7 +18,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "StringNode: " + t.TokenString() + "\n";
+            return "String: " + t.TokenString() + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

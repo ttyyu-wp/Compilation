@@ -19,7 +19,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "AssignNode: \n";
+            return "Assign \n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

@@ -19,7 +19,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "声明: " + kw.TokenString() + " " + id.TokenString() + "\n";
+            return "Declare: " + kw.TokenString() + " " + id.TokenString() + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

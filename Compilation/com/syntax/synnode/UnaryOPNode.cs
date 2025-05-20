@@ -20,7 +20,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "UnaryOPNode: " + t.TokenString() + "\n";
+            return "UnaryOP: " + t.TokenString() + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

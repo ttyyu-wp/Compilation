@@ -19,7 +19,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "WhileNode \n";
+            return "While \n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

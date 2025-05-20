@@ -17,7 +17,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "PrintNode" + "\n";
+            return "Print" + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()

@@ -30,7 +30,7 @@ namespace Compilation.bn.syntax.synnode
 
         public string toString()
         {
-            return "FunctionNode: " + funName.TokenString() + "\n";
+            return "Function: " + funName.TokenString() + "\n";
         }
 
         public IEnumerable<SyntaxNode> getChild()
