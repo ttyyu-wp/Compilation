@@ -1,0 +1,15 @@
+﻿int a[5]
+float b[5]
+string c[5]
+bool d[5]
+Cia main() {
+    a[0] = 1
+    b[0] = 1.8
+    c[0] = "5555"
+    d[0] = true
+
+    print(a[0] + "\n")
+    print(b[0] + "\n")
+    print(c[0] + "\n")
+    print(d[0] + "\n")
+}
