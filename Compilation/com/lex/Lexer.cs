@@ -40,7 +40,7 @@ namespace Compilation.lex
             return false;
         }
 
-        //考察下一个字符
+        //下一个字符
         public static char? watchNextChar()
         {
             if (currCharIndex < currLine.Length)
@@ -67,6 +67,7 @@ namespace Compilation.lex
             throw new MyException(errMsg.ToString());
         }
 
+        //分析Token序列
         public static List<Token> analyzeTokenFromCode(string code)
         {
             lexResult = new List<Token>();

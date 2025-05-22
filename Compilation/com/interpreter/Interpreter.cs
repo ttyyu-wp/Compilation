@@ -21,8 +21,6 @@ namespace Compilation.com.interpreter
 
         public static Dictionary<string, FunctionNode> fun;
 
-        
-
         //执行AST
         public void runAST(SyntaxNode root)
         {

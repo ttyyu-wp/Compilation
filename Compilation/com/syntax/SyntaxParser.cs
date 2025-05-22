@@ -544,7 +544,8 @@ namespace Compilation.bn.syntax
         /*atom -> INT | FLOAT | STRING | BOOLV
         -> (PLUS | MINUS | NOT)atom
         -> LPAREN arithORStrORBoolExpr RSB) | call)*
-        -> READ# LPAREN RPAREN */
+        -> READ* LPAREN RPAREN 
+        -> sin() | cos() | tan() | log() */
         public static SyntaxNode parseAtom()
         {
             Token curr = currToken();
@@ -610,6 +611,7 @@ namespace Compilation.bn.syntax
                     return new VariableNode(curr);
                 }
             }
+            //Read系列函数实现
             else if (curr.type == TokenType.READINT)
             {
                 tokenIndex++;
@@ -670,6 +672,7 @@ namespace Compilation.bn.syntax
                 tokenIndex++;
                 return new ReadNode(ReadNodeType.BOOL);
             }
+            //三角函数及简单对数函数实现
             else if (curr.type == TokenType.SIN)
             {
                 tokenIndex++;
